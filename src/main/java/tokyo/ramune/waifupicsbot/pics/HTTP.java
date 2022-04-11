@@ -1,4 +1,4 @@
-package tokyo.ramune.Pics;
+package tokyo.ramune.waifupicsbot.pics;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

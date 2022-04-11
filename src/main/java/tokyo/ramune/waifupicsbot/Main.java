@@ -1,9 +1,8 @@
-package tokyo.ramune;
+package tokyo.ramune.waifupicsbot;
 
-import tokyo.ramune.Pics.HTTP;
+import tokyo.ramune.waifupicsbot.pics.HTTP;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
 import javax.imageio.ImageIO;
@@ -28,13 +27,14 @@ public class Main {
             ImageIO.write(readImage, "jpg", outputfile);
         } catch (Exception ignored) {
         }
-        StatusUpdate statusUpdate = new StatusUpdate("");
+        StatusUpdate statusUpdate = new StatusUpdate("#waifu #Waifus #anime #animegirl");
         statusUpdate.setMedia(outputfile);
         try {
             twitter.updateStatus(statusUpdate);
-        } catch (TwitterException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println("OK");
+        new File("image.jpg").deleteOnExit();
     }
 }
