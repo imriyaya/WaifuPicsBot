@@ -20,26 +20,35 @@ public class Main {
         Twitter twitter = factory.getInstance();
         URL imageURL = null;
 
-        while (imageURL == null || imageURL.toString().endsWith("gif")) {
-            try {
-                imageURL = new URL(new HTTP().getImage(new Random().nextBoolean()));
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.exit(1);
-            }
+        try {
+            imageURL = new URL(new HTTP().getImage(new Random().nextBoolean()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
         }
 
-        System.out.println("Converting image to image.jpg");
+        String imageFormat = "jpg";
+        if (imageURL.toString().endsWith("gif")) {
+            imageFormat = "gif";
+        }
+
+        System.out.println("Converting image to image." + imageFormat);
 
         try (InputStream in = imageURL.openStream()) {
-            Files.copy(in, new File("image.jpg").toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(in, new File("image." + imageFormat).toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        StatusUpdate statusUpdate = new StatusUpdate("");
+        StatusUpdate statusUpdate;
 
-        statusUpdate.setMedia(new File("image.jpg"));
+        if (new Random().nextInt(100) == 1) {
+            statusUpdate = new StatusUpdate("#waifu #Waifus #anime #animegirl");
+        } else {
+            statusUpdate = new StatusUpdate("");
+        }
+
+        statusUpdate.setMedia(new File("image." + imageFormat));
 
         System.out.println("Uploading waifu image to Twitter...");
 
@@ -50,6 +59,6 @@ public class Main {
             System.exit(1);
             e.printStackTrace();
         }
-        new File("image.jpg").deleteOnExit();
+        new File("image." + imageFormat).deleteOnExit();
     }
 }

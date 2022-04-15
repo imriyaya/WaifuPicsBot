@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="eff1c6cf-b78f-4f77-aac1-c32eff2338f0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/HTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/HTTP.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
