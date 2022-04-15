@@ -50,5 +50,6 @@ public class Main {
             System.exit(1);
             e.printStackTrace();
         }
+        new File("image.jpg").deleteOnExit();
     }
 }
