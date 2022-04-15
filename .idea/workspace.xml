@@ -10,9 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eff1c6cf-b78f-4f77-aac1-c32eff2338f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/ImageNSFWCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/ImageSFWCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/HTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/HTTP.java" afterDir="false" />
     </list>
@@ -54,6 +51,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17387468" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
