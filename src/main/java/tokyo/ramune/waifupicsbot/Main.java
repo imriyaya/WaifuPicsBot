@@ -6,9 +6,15 @@ import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
+import javax.imageio.spi.ImageWriterSpi;
+import javax.imageio.stream.ImageOutputStream;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.Random;
 
 public class Main {
 
@@ -16,25 +22,36 @@ public class Main {
         TwitterFactory factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();
         URL imageURL = null;
-        try {
-            imageURL = new URL(new HTTP().getImage());
-        } catch (Exception ignored) {
+
+        while (imageURL == null || imageURL.toString().endsWith("gif")) {
+            try {
+                imageURL = new URL(new HTTP().getImage(new Random().nextBoolean()));
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
-        BufferedImage readImage = null;
-        File outputfile = new File("image.jpg");
-        try {
-            readImage = ImageIO.read(imageURL);
-            ImageIO.write(readImage, "jpg", outputfile);
-        } catch (Exception ignored) {
-        }
-        StatusUpdate statusUpdate = new StatusUpdate("#waifu #Waifus #anime #animegirl");
-        statusUpdate.setMedia(outputfile);
-        try {
-            twitter.updateStatus(statusUpdate);
-        } catch (Exception e) {
+
+        System.out.println("Converting image to image.jpg");
+
+        try (InputStream in = imageURL.openStream()) {
+            Files.copy(in, new File("image.jpg").toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("OK");
-        new File("image.jpg").deleteOnExit();
+
+        StatusUpdate statusUpdate = new StatusUpdate("");
+
+        statusUpdate.setMedia(new File("image.jpg"));
+
+        System.out.println("Uploading waifu image to Twitter...");
+
+        try {
+            twitter.updateStatus(statusUpdate);
+            System.out.println("Success!");
+        } catch (Exception e) {
+            System.exit(1);
+            e.printStackTrace();
+        }
     }
 }
