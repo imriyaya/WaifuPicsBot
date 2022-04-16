@@ -13,14 +13,10 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class HTTP {
-    public String getImage(boolean isNSFW) {
+    public Response getImage() {
         URL url = null;
         try {
-            if (isNSFW) {
-                url = new URL("https://waifu.pics/api/nsfw/" + ImageNSFWCategory.values()[(int) (Math.random() * ( ImageNSFWCategory.values().length))].toString());
-            } else {
-                url = new URL("https://waifu.pics/api/sfw/" + ImageSFWCategory.values()[(int) (Math.random() * ( ImageSFWCategory.values().length))].toString());
-            }
+            url = new URL("https://api.waifu.im/random/");
             System.out.println("Getting image from " + url.toString() + "...");
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -76,9 +72,12 @@ public class HTTP {
         System.out.println("Getting image url from waifu API...");
         try {
             JsonNode jsonNode = mapper.readTree(xml);
-            return jsonNode.findValue("url").toString().replace('"', ' ').replace(" ", "");
-        } catch (JsonProcessingException e) {
-            System.exit(1);
+            return new Response(new URL(jsonNode.findPath("images").findValuesAsText("url").toString().replace("[", "").replace("]", ""))
+                    , new URL(jsonNode.findPath("images").findValuesAsText("source").toString().replace("[", "").replace("]", ""))
+                    , jsonNode.findPath("images").findPath("tags").findValuesAsText("name").toString().replace("[", "").replace("]", "")
+                    , jsonNode.findPath("images").findPath("tags").findValuesAsText("description").toString().replace("[", "").replace("]", ""));
+        } catch (Exception e) {
+            e.printStackTrace();
             System.exit(1);
             return null;
         }

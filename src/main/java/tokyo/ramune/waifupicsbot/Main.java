@@ -1,6 +1,7 @@
 package tokyo.ramune.waifupicsbot;
 
 import tokyo.ramune.waifupicsbot.pics.HTTP;
+import tokyo.ramune.waifupicsbot.pics.Response;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -18,14 +19,14 @@ public class Main {
     public static void main(String[] args) {
         TwitterFactory factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();
-        URL imageURL = null;
+        Response response = new HTTP().getImage();
+        URL imageURL, sourceURL;
+        String name, description;
 
-        try {
-            imageURL = new URL(new HTTP().getImage(new Random().nextBoolean()));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
+        imageURL = response.imageURL();
+        sourceURL = response.imageSourceURL();
+        name = response.name();
+        description = response.description();
 
         String imageFormat = "jpg";
         if (imageURL.toString().endsWith("gif")) {
@@ -42,10 +43,16 @@ public class Main {
 
         StatusUpdate statusUpdate;
 
-        if (new Random().nextInt(100) == 1) {
-            statusUpdate = new StatusUpdate("#waifu #Waifus #anime #animegirl");
+        if (new Random().nextInt(2) == 1) {
+            statusUpdate = new StatusUpdate(
+                    "Image type: " + name + "\n" +
+                            "Image description: " + description + "\n" +
+                            "Source: " + sourceURL + "\n" +
+                            "#waifu #Waifus #anime #animegirl");
         } else {
-            statusUpdate = new StatusUpdate("");
+            statusUpdate = new StatusUpdate("Image type: " + name + "\n" +
+                    "Image description: " + description + "\n" +
+                    "Source: " + sourceURL);
         }
 
         statusUpdate.setMedia(new File("image." + imageFormat));
@@ -56,8 +63,8 @@ public class Main {
             twitter.updateStatus(statusUpdate);
             System.out.println("Success!");
         } catch (Exception e) {
-            System.exit(1);
             e.printStackTrace();
+            System.exit(1);
         }
         new File("image." + imageFormat).deleteOnExit();
     }
