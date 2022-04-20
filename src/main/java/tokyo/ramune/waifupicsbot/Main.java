@@ -41,19 +41,19 @@ public class Main {
             e.printStackTrace();
         }
 
-        StatusUpdate statusUpdate;
-
-        if (new Random().nextInt(2) == 1) {
-            statusUpdate = new StatusUpdate(
-                    "Image type: " + name + "\n" +
-                            "Image description: " + description + "\n" +
-                            "Source: " + sourceURL + "\n" +
-                            "#waifu #Waifus #anime #animegirl");
-        } else {
-            statusUpdate = new StatusUpdate("Image type: " + name + "\n" +
-                    "Image description: " + description + "\n" +
-                    "Source: " + sourceURL);
+        if (name.length() >= 30) {
+            name = name.substring(30) + "...";
         }
+
+        if (description.length() >= 70) {
+            description = description.substring(70) + "...";
+        }
+
+        StatusUpdate statusUpdate = new StatusUpdate(
+                "Image type: " + name + "\n" +
+                        "Image description: " + description + "\n" +
+                        "Source: " + sourceURL + "\n" +
+                        "#waifu #Waifus #anime #animegirl");
 
         statusUpdate.setMedia(new File("image." + imageFormat));
 

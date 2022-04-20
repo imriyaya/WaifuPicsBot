@@ -11,12 +11,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Random;
 
 public class HTTP {
     public Response getImage() {
         URL url = null;
         try {
             url = new URL("https://api.waifu.im/random/");
+            if (new Random().nextBoolean()) {
+                url = new URL("https://api.waifu.im/random/?is_nsfw=true");
+            }
             System.out.println("Getting image from " + url.toString() + "...");
         } catch (MalformedURLException e) {
             e.printStackTrace();
