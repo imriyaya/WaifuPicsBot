@@ -45,8 +45,8 @@ public class Main {
             name = name.substring(30) + "...";
         }
 
-        if (description.length() >= 70) {
-            description = description.substring(70) + "...";
+        if (description.length() >= 50) {
+            description = description.substring(50) + "...";
         }
 
         StatusUpdate statusUpdate = new StatusUpdate(
