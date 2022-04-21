@@ -12,12 +12,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Random;
 
 public class Main {
 
+    private static TwitterFactory factory;
+
     public static void main(String[] args) {
-        TwitterFactory factory = new TwitterFactory();
+        factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();
         Response response = new HTTP().getImage();
         URL imageURL, sourceURL;
@@ -67,5 +68,9 @@ public class Main {
             System.exit(1);
         }
         new File("image." + imageFormat).deleteOnExit();
+    }
+
+    public static TwitterFactory getFactory() {
+        return factory;
     }
 }
