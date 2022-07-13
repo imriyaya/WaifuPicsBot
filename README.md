@@ -8,7 +8,7 @@ Automatically get an image from the image API, describe its description, type, i
 
 
 # Waifu Image API
-Powered by [waifu.im](https://waifu.im)  
+Powered by [waifu.im](https://waifu.im)&[waifu.pics](https://waifu.pics)
 Thanks :D
 
 # License
