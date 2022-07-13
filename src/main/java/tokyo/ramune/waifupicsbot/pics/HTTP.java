@@ -11,16 +11,31 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class HTTP {
     public Response getImage() {
         URL url = null;
+        final ArrayList<String> sfwCategories = new ArrayList<>(
+                Arrays.asList("waifu", "neko", "shinobu", "megumin", "bully",
+                        "cuddle", "cry", "hug", "awoo", "kiss",
+                        "lick", "pat", "smug", "bonk", "yeet",
+                        "blush", "smile", "wave", "highfive", "handhold",
+                        "nom", "bite", "glomp", "slap", "kill", "dance",
+                        "kick", "happy", "wink", "poke", "cringe"));
+        final ArrayList<String> nsfwCategories = new ArrayList<>(
+                Arrays.asList("waifu", "neko", "trap", "blowjob"));
         try {
-            url = new URL("https://api.waifu.im/random/");
+            String rawUrl = "https://api.waifu.pics/sfw/";
+            rawUrl = rawUrl + sfwCategories.get(new Random().nextInt(sfwCategories.size() - 1) + 1);
             if (new Random().nextBoolean()) {
-                url = new URL("https://api.waifu.im/random/?is_nsfw=true");
+                rawUrl = "https://api.waifu.pics/nsfw/";
+                rawUrl = rawUrl + nsfwCategories.get(new Random().nextInt(nsfwCategories.size() - 1) + 1);
             }
+            System.out.println(rawUrl);
+            url = new URL(rawUrl);
             System.out.println("Getting image from " + url.toString() + "...");
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -76,10 +91,7 @@ public class HTTP {
         System.out.println("Getting image url from waifu API...");
         try {
             JsonNode jsonNode = mapper.readTree(xml);
-            return new Response(new URL(jsonNode.findPath("images").findValuesAsText("url").toString().replace("[", "").replace("]", ""))
-                    , new URL(jsonNode.findPath("images").findValuesAsText("source").toString().replace("[", "").replace("]", ""))
-                    , jsonNode.findPath("images").findPath("tags").findValuesAsText("name").toString().replace("[", "").replace("]", "")
-                    , jsonNode.findPath("images").findPath("tags").findValuesAsText("description").toString().replace("[", "").replace("]", ""));
+            return new Response(new URL(jsonNode.findValuesAsText("url").toString().replace("[", "").replace("]", "")));
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

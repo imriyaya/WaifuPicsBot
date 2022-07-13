@@ -24,7 +24,6 @@ public class Main {
         URL imageURL, sourceURL;
 
         imageURL = response.imageURL();
-        sourceURL = response.imageSourceURL();
 
         String imageFormat = "jpg";
         if (imageURL.toString().endsWith("gif")) {
@@ -39,9 +38,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        StatusUpdate statusUpdate = new StatusUpdate(
-                        "Source: " + sourceURL + "\n" +
-                        "#waifu #Waifus #anime #animegirl");
+        StatusUpdate statusUpdate = new StatusUpdate("#waifu #Waifus #anime #animegirl");
 
         statusUpdate.setMedia(new File("image." + imageFormat));
 
