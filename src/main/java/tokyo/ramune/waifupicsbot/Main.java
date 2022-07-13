@@ -22,12 +22,9 @@ public class Main {
         Twitter twitter = factory.getInstance();
         Response response = new HTTP().getImage();
         URL imageURL, sourceURL;
-        String name, description;
 
         imageURL = response.imageURL();
         sourceURL = response.imageSourceURL();
-        name = response.name();
-        description = response.description();
 
         String imageFormat = "jpg";
         if (imageURL.toString().endsWith("gif")) {
@@ -42,17 +39,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        if (name.length() >= 30) {
-            name = name.substring(30) + "...";
-        }
-
-        if (description.length() >= 50) {
-            description = description.substring(50) + "...";
-        }
-
         StatusUpdate statusUpdate = new StatusUpdate(
-                "Image type: " + name + "\n" +
-                        "Image description: " + description + "\n" +
                         "Source: " + sourceURL + "\n" +
                         "#waifu #Waifus #anime #animegirl");
 
