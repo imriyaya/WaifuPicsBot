@@ -21,7 +21,7 @@ public class Main {
         factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();
         Response response = new HTTP().getImage();
-        URL imageURL, sourceURL;
+        URL imageURL;
 
         imageURL = response.imageURL();
 
@@ -38,7 +38,8 @@ public class Main {
             e.printStackTrace();
         }
 
-        StatusUpdate statusUpdate = new StatusUpdate("#waifu #Waifus #anime #animegirl");
+        StatusUpdate statusUpdate = new StatusUpdate("source: " + response.source()
+                + "\n#waifu #Waifus #anime #animegirl");
 
         statusUpdate.setMedia(new File("image." + imageFormat));
 
