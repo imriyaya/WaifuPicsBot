@@ -21,9 +21,8 @@ public class Main {
         factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();
         Response response = new HTTP().getImage();
-        URL imageURL;
 
-        imageURL = response.imageURL();
+        URL imageURL = response.getImageURL();
 
         String imageFormat = "jpg";
         if (imageURL.toString().endsWith("gif")) {
@@ -38,7 +37,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        StatusUpdate statusUpdate = new StatusUpdate("source: " + response.source()
+        StatusUpdate statusUpdate = new StatusUpdate("source: " + response.getSource()
                 + "\n#waifu #Waifus #anime #animegirl");
 
         statusUpdate.setMedia(new File("image." + imageFormat));
@@ -53,9 +52,5 @@ public class Main {
             System.exit(1);
         }
         new File("image." + imageFormat).deleteOnExit();
-    }
-
-    public static TwitterFactory getFactory() {
-        return factory;
     }
 }

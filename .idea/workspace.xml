@@ -9,12 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eff1c6cf-b78f-4f77-aac1-c32eff2338f0" name="Changes" comment="waifu.picsに変更">
+    <list default="true" id="eff1c6cf-b78f-4f77-aac1-c32eff2338f0" name="Changes" comment="summary">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/HTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/HTTP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tokyo/ramune/waifupicsbot/pics/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/twitter4j.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +94,13 @@
       <workItem from="1654782603509" duration="10000" />
       <workItem from="1657722934010" duration="3737000" />
       <workItem from="1657783521775" duration="12000" />
-      <workItem from="1657931563714" duration="377000" />
+      <workItem from="1657931563714" duration="544000" />
+      <workItem from="1657932128707" duration="114000" />
+      <workItem from="1657957075436" duration="17000" />
+      <workItem from="1657961511846" duration="1616000" />
+      <workItem from="1657993272004" duration="300000" />
+      <workItem from="1658018135412" duration="23000" />
+      <workItem from="1659080098392" duration="734000" />
     </task>
     <task id="LOCAL-00001" summary="twitterの文字数制限を回避するようにしました">
       <created>1650468083293</created>
@@ -135,7 +137,21 @@
       <option name="project" value="LOCAL" />
       <updated>1657726636218</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="summary">
+      <created>1657931960320</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1657931960320</updated>
+    </task>
+    <task id="LOCAL-00007" summary="summary">
+      <created>1657932108944</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1657932108944</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +172,7 @@
     <MESSAGE value="twitterの文字数制限を回避するようにしました" />
     <MESSAGE value="修正" />
     <MESSAGE value="waifu.picsに変更" />
-    <option name="LAST_COMMIT_MESSAGE" value="waifu.picsに変更" />
+    <MESSAGE value="summary" />
+    <option name="LAST_COMMIT_MESSAGE" value="summary" />
   </component>
 </project>

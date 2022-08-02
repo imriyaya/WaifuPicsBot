@@ -1,6 +1,5 @@
 package tokyo.ramune.waifupicsbot.pics;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -8,11 +7,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class HTTP {
@@ -73,12 +69,32 @@ public class HTTP {
             e.printStackTrace();
             System.exit(1);
         }
-        ObjectMapper mapper = new ObjectMapper();
+
         System.out.println("Getting image url from waifu API...");
+        ObjectMapper mapper = new ObjectMapper();
         try {
             JsonNode jsonNode = mapper.readTree(xml);
-            return new Response(new URL(jsonNode.findPath("images").findValuesAsText("url").toString().replace("[", "").replace("]", ""))
-                    , jsonNode.findPath("images").findValuesAsText("source").toString().replace("[", "").replace("]", ""));
+            return new Response() {
+                @Override
+                public URL getImageURL() {
+                    try {
+                        return new URL(jsonNode.findPath("images").findValuesAsText("url").toString()
+                                .replace("[", "")
+                                .replace("]", ""));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                        return null;
+                    }
+                }
+
+                @Override
+                public String getSource() {
+                    return jsonNode.findPath("images").findValuesAsText("source").toString()
+                            .replace("[", "")
+                            .replace("]", "");
+                }
+            };
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
