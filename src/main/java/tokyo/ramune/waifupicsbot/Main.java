@@ -2,6 +2,8 @@ package tokyo.ramune.waifupicsbot;
 
 import tokyo.ramune.waifupicsbot.pics.HTTP;
 import tokyo.ramune.waifupicsbot.pics.Response;
+import tokyo.ramune.waifupicsbot.utility.DiscordWebhook;
+import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -32,25 +34,30 @@ public class Main {
         System.out.println("Converting image to image." + imageFormat);
 
         try (InputStream in = imageURL.openStream()) {
-            Files.copy(in, new File("image." + imageFormat).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            StatusUpdate statusUpdate = new StatusUpdate("source: " + response.getSource()
+                    + "\n#waifu #Waifus #anime #animegirl");
+
+            statusUpdate.setMedia("media", in);
+
+            System.out.println("Uploading waifu image to Twitter...");
+
+
+            try {
+                Status status = twitter.updateStatus(statusUpdate);
+                try {
+                    System.out.println("Sending discord webhook...");
+                    DiscordWebhook discordWebhook = new DiscordWebhook("https://discord.com/api/webhooks/1012626900193132645/uFPdF1MX7GEdPGEWfdBvVVdL06T3zIvrhKNQ3JiRBDf3pWvlohcIZ0b5y5jLdxD-w7eJ");
+                    discordWebhook.addEmbed(new DiscordWebhook.EmbedObject().setImage(status.getMediaEntities()[0].getMediaURL()));
+                    discordWebhook.execute();
+                } catch (Exception ignored) {
+                }
+                System.out.println("Success!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        StatusUpdate statusUpdate = new StatusUpdate("source: " + response.getSource()
-                + "\n#waifu #Waifus #anime #animegirl");
-
-        statusUpdate.setMedia(new File("image." + imageFormat));
-
-        System.out.println("Uploading waifu image to Twitter...");
-
-        try {
-            twitter.updateStatus(statusUpdate);
-            System.out.println("Success!");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        new File("image." + imageFormat).deleteOnExit();
     }
 }
