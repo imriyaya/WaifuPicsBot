@@ -15,9 +15,9 @@ public class HTTP {
     public Response getImage() {
         URL url = null;
         try {
-            url = new URL("https://api.waifu.im/random/");
+            url = new URL("https://api.waifu.im/search/");
             if (new Random().nextBoolean()) {
-                url = new URL("https://api.waifu.im/random/?is_nsfw=true");
+                url = new URL("https://api.waifu.im/search/?is_nsfw=true");
             }
         } catch (Exception e) {
             e.printStackTrace();
